@@ -1,0 +1,144 @@
+name: configured_data_file
+description: Plugin to configured template data file
+display-name: configured_data_file
+picture: plugin.png
+category: backend # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/plugin/#category
+compatibility:
+  - java
+  - spring
+about: docs/about.md
+usage: docs/usage.md
+use-case: docs/use-case.md
+implementation: docs/implementation.md
+technologies: # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/yaml/#technologies
+  - "Api"
+types:
+  - app
+inputs:
+  - label: Project name
+    type: text
+    name: project_name
+    default: Tools Stack Sport
+
+  - label: add prefix "42SP projects" before of project name?
+    type: bool
+    name: add_prefix
+    default: true
+
+  - label: Path to file to be configured
+    type: text
+    name: path_to_file
+    default: ../Projeto_py/docs/
+
+  - label: Developer name
+    type: text
+    name: Developer_name
+    default: Wagraton Wallas Ferreia Santos
+
+  - label: beauty level from 1 to 10
+    type: text
+    name: deauty_level
+
+  - label: developer age
+    type: text
+    name: developer_age
+    default: "20"
+
+
+  - label: Credit card number
+    type: text
+    name: credit_card_number
+    default: "164-874-458-85"
+
+################################################################################
+#                        hock to add project name                              #
+################################################################################
+hooks:
+  - type: edit
+    trigger: after-render
+    path: "{{inputs.path_to_file}}data.txt"
+    condition:
+      variable: add_prefix
+      operator: "=="
+      value: false
+    changes:
+      - insert:
+          line: 0
+          value: "\t{{inputs.project_name}}\n"
+          when:
+            not-exists: "{{inputs.project_name}}"
+
+################################################################################
+#                   hock to add project name with prefix                       #
+################################################################################
+  - type: edit
+    trigger: after-render
+    path: "{{inputs.path_to_file}}data.txt"
+    condition:
+      variable: add_prefix
+      operator: "=="
+      value: true
+    changes:
+      - insert:
+          line: 0
+          value: "\t42SP projects: {{inputs.project_name}}\n"
+          when:
+            not-exists: "{{inputs.project_name}}"
+
+################################################################################
+#                        Add name in data file                                 #
+################################################################################
+  - type: edit
+    trigger: after-render
+    path: "{{inputs.path_to_file}}data.txt"
+    changes:
+      - insert:
+          line: 2
+          value: "\nName: {{inputs.Developer_name}}\n"
+          when:
+            not-exists: "\nName: {{inputs.Developer_name}}\n"
+################################################################################
+#                      Add deauty level in data file                                    #
+################################################################################
+  - type: edit
+    trigger: after-render
+    path: "{{inputs.path_to_file}}data.txt"
+    changes:
+      - insert:
+          line: 3
+          value: "deauty level: {{inputs.deauty_level}}\n"
+          when:
+            not-exists: "deauty level: {{inputs.deauty_level}}\n"
+
+################################################################################
+#                      Add Age in data file                                    #
+################################################################################
+  - type: edit
+    trigger: after-render
+    path: "{{inputs.path_to_file}}data.txt"
+    changes:
+      - insert:
+          line: 4
+          value: "Age: {{inputs.developer_age}}\n"
+          when:
+            not-exists: "Age: {{inputs.developer_age}}\n"
+
+
+################################################################################
+#                      Add Credit card number in data file                     #
+################################################################################
+  - type: edit
+    trigger: after-render
+    path: "{{inputs.path_to_file}}data.txt"
+    changes:
+      - insert:
+          line: 5
+          value: "Credit card number: {{inputs.credit_card_number}}\n"
+          when:
+            not-exists: "Credit card number: {{inputs.credit_card_number}}\n"
+
+
+
+
+
+

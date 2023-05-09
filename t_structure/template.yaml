@@ -1,0 +1,12 @@
+name: t_structure
+description: templat
+types:
+  - app-template
+inputs:
+  - label: Project name
+    type: text
+    name: project_name
+    default: project-name
+  - label: Choose welcome messege
+    type: text
+    name: welcome_messege
