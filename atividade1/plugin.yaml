@@ -1,6 +1,6 @@
-name: configured_data_file
+name: atividade1
 description: Plugin to configured template data file
-display-name: configured_data_file
+display-name: atividade1
 picture: plugin.png
 category: backend # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/plugin/#category
 compatibility:
@@ -97,6 +97,7 @@ hooks:
           value: "\nName: {{inputs.Developer_name}}\n"
           when:
             not-exists: "\nName: {{inputs.Developer_name}}\n"
+
 ################################################################################
 #                      Add deauty level in data file                                    #
 ################################################################################
@@ -123,7 +124,6 @@ hooks:
           when:
             not-exists: "Age: {{inputs.developer_age}}\n"
 
-
 ################################################################################
 #                      Add Credit card number in data file                     #
 ################################################################################
@@ -136,9 +136,3 @@ hooks:
           value: "Credit card number: {{inputs.credit_card_number}}\n"
           when:
             not-exists: "Credit card number: {{inputs.credit_card_number}}\n"
-
-
-
-
-
-

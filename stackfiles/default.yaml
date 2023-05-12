@@ -1,14 +1,10 @@
 type: app
 description: Default stackfile usecase description
 # template used to create the project
-template: structure_py/<template-name>
+template: structure_py/t_structure
 inputs:
   some_input: value
 # list of plugins to be applied after project creation
 plugins:
-  - plugin: structure_py/<plugin-name>
-    inputs:
-      some_input: value
-      some_list:
-        - item1
-        - item2
+  - plugin: structure_py/atividade1
+  - plugin: structure_py/atividade2

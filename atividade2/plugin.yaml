@@ -1,0 +1,43 @@
+name: atividade2
+description: PLUGIN CREATED TO REALIZE ATIVIDADE 2
+display-name: atividade2
+picture: plugin.png
+category: backend # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/plugin/#category
+compatibility:
+  - java
+  - spring
+about: docs/about.md
+usage: docs/usage.md
+use-case: docs/use-case.md
+implementation: docs/implementation.md
+technologies: # Ref: https://docs.stackspot.com/docs/create-stacks/yaml-files/yaml/#technologies
+  - "Api"
+types:
+  - app
+inputs:
+  - label: Path to file to be configured
+    type: text
+    name: path_to_file
+    default: ../Projeto_py/docs/
+  - label: Desecj create snippet?
+    type: bool
+    name: desecj_create_snippet
+    default: true
+
+
+
+hooks:
+  - type: edit
+    trigger: after-render
+    path: "{{inputs.path_to_file}}/data.txt"
+    condicion:
+      variable: desecj_create_snippet
+      operator: "=="
+      value: true
+    changes:
+      - insert:
+          line: -1
+          value: "../snippet/luffy"
+          snippet: "../snippet/luffy"
+          when:
+            snippet: "../snippet/luffy"
